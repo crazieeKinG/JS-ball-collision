@@ -66,7 +66,7 @@ class Circle {
         else if (this.y > CONTAINER_HEIGHT - this.radius) this.speedY = -Math.abs(this.speedY + 1);
     }
 
-    update = (balls) => {
+    check_ball_collision = (balls) => {
         this.move();
 
         balls.forEach(single_ball => {
@@ -95,11 +95,9 @@ class Circle {
 
                 let vx1 = (this.speedX * mass_difference + single_ball.speedX * 2 * single_ball.mass) / (this.mass + single_ball.mass);
                 let vy1 = this.speedY;
-                // let vy1 = (this.speedY + (this.speedY * mass_difference + single_ball.speedY * 2 * single_ball.mass) / (this.mass + single_ball.mass)) / 2;
 
                 let vx2 = (single_ball.speedX * mass_difference + this.speedX * 2 * this.mass) / (this.mass + single_ball.mass);
                 let vy2 = single_ball.speedY;
-                // let vy2 = (single_ball.speedY + (single_ball.speedY * mass_difference + this.speedY * 2 * this.mass) / (this.mass + single_ball.mass)) / 2;
 
                 cos_value = Math.cos(-angle);
                 sin_value = Math.sin(-angle);
@@ -155,7 +153,7 @@ function play() {
     window.requestAnimationFrame(play);
 
     ball_array.forEach((ball) => {
-        ball.update(ball_array);
+        ball.check_ball_collision(ball_array);
     });
 
 }
